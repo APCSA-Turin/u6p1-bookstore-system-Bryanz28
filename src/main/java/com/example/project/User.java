@@ -1,24 +1,62 @@
 package com.example.project;
 
-public class User{
-    //requires 3 private attributes String name, String Id, Book book that is initialized to empty
+public class User {
+    // Requires 3 private attributes
+    private String name;
+    private String id;
+    private Book[] books; // This should be initialized to empty
 
-    //requires 1 contructor with two parameters that will initialize the name and id
- 
-    // public  getName() {}
+    // Requires 1 constructor with two parameters that will initialize the name and id
+    public User(String name, String id) {
+        this.name = name;
+        this.id = id;
+        this.books = new Book[5]; // Initialize the book to null (empty)
+    }
 
-    // public  setName() {}
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
 
-    // public  getId() {}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    // public void setId() {}
+    public String getId() {
+        return id;
+    }
 
-    // public getBooks() {}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    // public setBooks() {}
+    public Book[] getBooks() {
+        return books.clone();
+    }
 
-    // public String bookListInfo(){} //returns a booklist for the user, if empty, output "empty"
+    public void setBooks(Book[] books) {
+        this.books = books;
+    }
 
-    // public String userInfo(){} //returns  "Name: []\nID: []\nBooks:\n[]"
-       
+    // Returns a book list for the user, if empty, outputs "empty"
+    public String bookListInfo() {
+        // create string list for list of book information
+        String[] booksInfo = new String[5];
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) { // null space
+                booksInfo[i] = "empty";
+            } else { // this book exists
+                // add the book's info the the array
+                booksInfo[i] = books[i].bookInfo();
+            }
+        }
+        // join the book information together with newlines
+        return String.join("\n", booksInfo);
+    }
+
+    // Returns "Name: []\nID: []\nBooks:\n[]"
+    public String userInfo() {
+        String booksInfo = bookListInfo();
+        return "Name: " + name + "\nId: " + id + "\nBooks: \n" + booksInfo + "\n";
+    }
 }
